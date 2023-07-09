@@ -1,6 +1,8 @@
 package edu.uptc.view;
 
 import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Runner {
 
@@ -8,7 +10,8 @@ public class Runner {
 		mainMenu();
 	}
     
-
+	// Menu
+	
 	private static void mainMenu() {
         String menu = "<<<<<<<MENU PRINCIPAL>>>>>>>\n"
         		+ "\n 1. Numero Romano"
@@ -33,7 +36,7 @@ public class Runner {
                         roman();
                         break;
                     case '2':
-                        // Realizar acciones para la opción 2
+                        prime();
                         break;
                     case '3':
                         // Realizar acciones para la opción 3
@@ -56,6 +59,8 @@ public class Runner {
         } while (true);
     }
     
+	// NumerosRomanos
+	
     private static void roman() {
 
         try {
@@ -70,7 +75,7 @@ public class Runner {
     }
    
     public static int convertRomanToDecimal(String romanNumber) {
-        romanNumber = romanNumber.toUpperCase(); // Convertir la entrada a mayúscula
+        romanNumber = romanNumber.toUpperCase();
         
         int decimalNumber = 0;
         
@@ -131,4 +136,71 @@ public class Runner {
         }
     }
 
+    // FactoresPrimos
+    
+    public static void prime() {
+    	 boolean isValidInput = false;
+         
+         while (!isValidInput) {
+             try {
+                 String input = JOptionPane.showInputDialog("Ingrese un número:");
+                 
+                 if (input == null) {
+                     break;
+                 }
+                 
+                 int number = Integer.parseInt(input);
+                 
+                 List<Integer> primeFactors = findPrimeFactors(number);
+                 String result = formatPrimeFactors(primeFactors);
+                 
+                 String output = "Los factores primos de " + number + " son: " + primeFactors + "\n" +
+                                 "Expresado en formato de potencias: " + result;
+                 
+                 JOptionPane.showMessageDialog(null, output);
+                 
+                 isValidInput = true;
+             } catch (NumberFormatException e) {
+                 JOptionPane.showMessageDialog(null, "Error: Entrada no válida. Debe ingresar un número entero.");
+             }
+         }
+    }
+    
+    public static List<Integer> findPrimeFactors(int number) {
+        List<Integer> primeFactors = new ArrayList<>();
+        
+        for (int i = 2; i <= number; i++) {
+            while (number % i == 0) {
+                primeFactors.add(i);
+                number /= i;
+            }
+        }
+        
+        return primeFactors;
+    }
+    
+    public static String formatPrimeFactors(List<Integer> primeFactors) {
+        StringBuilder result = new StringBuilder();
+        
+        int currentFactor = primeFactors.get(0);
+        int count = 1;
+        
+        for (int i = 1; i < primeFactors.size(); i++) {
+            int factor = primeFactors.get(i);
+            
+            if (factor == currentFactor) {
+                count++;
+            } else {
+                result.append(currentFactor).append("^").append(count).append(" * ");
+                currentFactor = factor;
+                count = 1;
+            }
+        }
+        
+        result.append(currentFactor).append("^").append(count);
+        
+        return result.toString();
+    }
+    
+    
 }
