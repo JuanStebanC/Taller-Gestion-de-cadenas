@@ -8,11 +8,9 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-import javax.swing.JOptionPane;
 
 public class Runner {
 
@@ -49,10 +47,10 @@ public class Runner {
                         prime();
                         break;
                     case '3':
-                        // Realizar acciones para la opción 3
+                        spaceLines();
                         break;
                     case '4':
-                        // Realizar acciones para la opción 4
+                        numberEgo();
                         break;
                     case '5':
                         magic_numbers();
@@ -214,66 +212,58 @@ public class Runner {
 
 	// 3. Espacios	
 
-        public class SpacesLines {
-
-	public static void main(String[] args) {
+ 	public static void spaceLines() {
 		
-		String text = "  Buenas  tardes, espero      termine     bien  su    dia.  ";
+		String text = JOptionPane.showInputDialog("Ingrese la cadena de texto");
         String operation = DeleteSpaces(text);
-        System.out.println(operation);
-        
+        JOptionPane.showMessageDialog(null, operation);
 	}
 	
-        public static String DeleteSpaces(String text) {
+    public static String DeleteSpaces(String text) {
 	        text = text.trim();
-
 	        Pattern pattern = Pattern.compile("\\s+");
 	        Matcher matcher = pattern.matcher(text);
 	        text = matcher.replaceAll(" ");
-
 	        return text;
 	    }
-}
 
 	// 4. NumeroEgolatra
 
-		public class NumberEgo {
-
-		    public static void main(String[] args) {
-		    	
-		    	        String numString = JOptionPane.showInputDialog("Ingrese el numero que desee");
-		    	        
-		    	        int numero = Integer.parseInt(numString);
-		    	        
-		    	        if (esEgolatra(numero)) {
-		    	            String resultado = numero + " es un numero egolatra.";
-		    	            JOptionPane.showMessageDialog(null, resultado);
-		    	        } else {
-		    	            String resultado = numero + " no es un numero egolatra.";
-		    	            JOptionPane.showMessageDialog(null, resultado);
-		    	            }
-		    	        }
-
-		    	    public static boolean esEgolatra(int numero) {
-		    	        String numeroStr = String.valueOf(numero);
-		    	        int n = numeroStr.length();
-		    	        int suma = 0;
-		    	        
-		    	        for (int i = 0; i < n; i++) {
-		    	            int digito = Character.getNumericValue(numeroStr.charAt(i));
-		    	            suma += Math.pow(digito, n);
-		    	        }
-		    	        
-		    	        return suma == numero;
-		    	    }
-		    	}
+	public static void numberEgo() {
+		try {
+            String numString = JOptionPane.showInputDialog("Ingrese el número que desee");
+            
+            int numero = Integer.parseInt(numString);
+            
+            if (esEgolatra(numero)) {
+                String resultado = numero + " es un número ególatra.";
+                JOptionPane.showMessageDialog(null, resultado);
+            } else {
+                String resultado = numero + " no es un número ególatra.";
+                JOptionPane.showMessageDialog(null, resultado);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: Entrada no válida. Debe ingresar un número entero.");
+        }
+		}
+	
+	public static boolean esEgolatra(int numero) {
+		String numeroStr = String.valueOf(numero);
+		int n = numeroStr.length();
+		int suma = 0;
+		for (int i = 0; i < n; i++) {
+			int digito = Character.getNumericValue(numeroStr.charAt(i));
+		    suma += Math.pow(digito, n);
+		    }
+		return suma == numero;
+		}
 
 // 5. NumerosMagicos
 	 private static void magic_numbers(){
 		 magic();
 	 }
-	
- public static void magic() {
+	 
+	 public static void magic() {
         try {
             String input = JOptionPane.showInputDialog("Ingrese un número:");
             int number = Integer.parseInt(input);
@@ -311,6 +301,7 @@ public class Runner {
     }
 
 	// 6. Fecha
+    
 	private static void fecha(){
 		  Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese una fecha (dd/mm/aaaa): ");
@@ -324,8 +315,6 @@ public class Runner {
             System.out.println("La fecha ingresada no corresponde a una fecha válida.");
         }
 	}
-
-
 	
         public static String obtenerDescripcionFecha(String fechaTexto) {
         DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
