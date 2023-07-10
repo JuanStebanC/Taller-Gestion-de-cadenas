@@ -237,7 +237,7 @@ public class Runner {
 
 	// 4. NumeroEgolatra
 
-		public class My_exercises_4 {
+		public class NumberEgo {
 
 		    public static void main(String[] args) {
 		    	
