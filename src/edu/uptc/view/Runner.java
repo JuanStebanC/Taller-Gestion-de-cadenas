@@ -50,7 +50,7 @@ public class Runner {
                         // Realizar acciones para la opción 4
                         break;
                     case '5':
-                        // Realizar acciones para la opción 5
+                        magic_numbers();
                         break;
                     case '6':
                         fecha();
@@ -207,6 +207,48 @@ public class Runner {
         return result.toString();
     }
 
+
+
+	 private static void magic_numbers(){
+		 magic();
+	 }
+	
+ public static void magic() {
+        try {
+            String input = JOptionPane.showInputDialog("Ingrese un número:");
+            int number = Integer.parseInt(input);
+            
+            if (isMagicNumber(number)) {
+                JOptionPane.showMessageDialog(null, number + " es un número mágico.");
+            } else {
+                JOptionPane.showMessageDialog(null, number + " no es un número mágico.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: Entrada no válida. Debe ingresar un número entero.");
+        }
+    }
+    
+    public static boolean isMagicNumber(int number) {
+        String numberString = Integer.toString(number);
+        String sortedAscending = sortDigitsAscending(numberString);
+        String sortedDescending = sortDigitsDescending(numberString);
+        
+        int result = Integer.parseInt(sortedDescending) - Integer.parseInt(sortedAscending);
+        
+        return result == number;
+    }
+    
+    public static String sortDigitsAscending(String numberString) {
+        char[] digits = numberString.toCharArray();
+        Arrays.sort(digits);
+        return new String(digits);
+    }
+    
+    public static String sortDigitsDescending(String numberString) {
+        char[] digits = numberString.toCharArray();
+        Arrays.sort(digits);
+        return new StringBuilder(new String(digits)).reverse().toString();
+    }
 
 	private static void fecha(){
 		  Scanner scanner = new Scanner(System.in);
