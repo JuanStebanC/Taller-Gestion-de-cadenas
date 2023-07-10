@@ -208,7 +208,7 @@ public class Runner {
     }
 
 
-
+// 5.NumerosMagicos
 	 private static void magic_numbers(){
 		 magic();
 	 }
@@ -250,6 +250,7 @@ public class Runner {
         return new StringBuilder(new String(digits)).reverse().toString();
     }
 
+	//Fecha
 	private static void fecha(){
 		  Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese una fecha (dd/mm/aaaa): ");
