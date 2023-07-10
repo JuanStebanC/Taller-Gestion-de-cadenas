@@ -1,4 +1,9 @@
 package edu.uptc.view;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import java.util.List;
@@ -48,7 +53,7 @@ public class Runner {
                         // Realizar acciones para la opción 5
                         break;
                     case '6':
-                        // Realizar acciones para la opción 6
+                        fecha();
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opción inválida. Intente nuevamente.");
@@ -201,6 +206,35 @@ public class Runner {
         
         return result.toString();
     }
-    
-    
+
+
+	private static void fecha(){
+		  Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese una fecha (dd/mm/aaaa): ");
+        String fechaTexto = scanner.nextLine();
+        
+        String descripcionFecha = obtenerDescripcionFecha(fechaTexto);
+        
+        if (descripcionFecha != null) {
+            System.out.println("Descripción de la fecha: " + descripcionFecha);
+        } else {
+            System.out.println("La fecha ingresada no corresponde a una fecha válida.");
+        }
+	}
+
+
+	
+        public static String obtenerDescripcionFecha(String fechaTexto) {
+        DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        formatoFecha.setLenient(false);
+        
+        try {
+            Date fecha = formatoFecha.parse(fechaTexto);
+            
+            DateFormat formatoDescripcion = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
+            return formatoDescripcion.format(fecha);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 }
